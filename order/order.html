@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Cuh Print & Delivery Service</title>
+
+    <link rel="stylesheet" href="order.css" />
+
+    <!-- PyScript -->
+    <link
+      rel="stylesheet"
+      href="https://pyscript.net/releases/2025.8.1/core.css"
+    />
+
+    <script
+      type="module"
+      src="https://pyscript.net/releases/2025.8.1/core.js"
+    ></script>
+  </head>
+
+  <body>
+    <main class="calculator">
+      <button type="button" id="backButton" class="back-button">← Back</button>
+
+      <h1>Printing Order Form</h1>
+
+      <p class="subtitle">You Click, We Print, We Deliver!</p>
+
+      <p class="notice">
+        Submit your file and printing preferences. We will review your order and
+        email you the final price. Printing begins only after you approve the
+        quotation.
+      </p>
+
+      <form id="orderForm">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter Full Name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contact">Contact Number</label>
+          <input
+            type="tel"
+            id="contact"
+            placeholder="Enter Contact Number"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="printType">Printing Type</label>
+
+          <select id="printType" required>
+            <option value="bw">Black and White</option>
+            <option value="color">Colored</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="paperSize">Paper Size</label>
+
+          <select id="paperSize" required>
+            <option value="short">Short Bond Paper</option>
+            <option value="long">Long Bond Paper</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="copies">Number of Copies</label>
+
+          <input
+            type="number"
+            id="copies"
+            min="1"
+            max="500"
+            value="1"
+            required
+          />
+        </div>
+
+        
+<div class="form-group">
+  <label for="fulfillment">Receiving Method</label>
+
+  <select id="fulfillment" required>
+    <option value="pickup">Pickup</option>
+    <option value="delivery">Delivery</option>
+  </select>
+</div>
+
+        <div class="form-group">
+          <label for="deliveryLocation">Where to Deliver?</label>
+
+          <select id="deliveryLocation" name="deliveryLocation" required>
+            <option value="">Select a location</option>
+
+            <optgroup label="Popular Places">
+              <option value="Cebu Eastern College">Cebu Eastern College</option>
+              <option value="SM City Cebu">SM City Cebu</option>
+              <option value="Ayala Center Cebu">Ayala Center Cebu</option>
+              <option value="SM Seaside City Cebu">SM Seaside City Cebu</option>
+              <option value="Cebu IT Park">Cebu IT Park</option>
+              <option value="Colon Street">Colon Street</option>
+            </optgroup>
+
+            <optgroup label="Schools and Universities">
+              <option value="University of San Carlos">
+                University of San Carlos
+              </option>
+              <option value="University of Cebu">University of Cebu</option>
+              <option value="Cebu Normal University">
+                Cebu Normal University
+              </option>
+              <option value="University of the Visayas">
+                University of the Visayas
+              </option>
+              <option value="University of Southern Philippines Foundation">
+                University of Southern Philippines Foundation
+              </option>
+              <option value="Southwestern University PHINMA">
+                Southwestern University PHINMA
+              </option>
+            </optgroup>
+
+            <option value="Other Location">Other Location</option>
+          </select>
+        </div>
+
+        <!-- Hidden until Other Location is selected -->
+        <div class="form-group full" id="otherLocationGroup" hidden>
+          <label for="otherLocation">Specify Your Location</label>
+
+          <input
+            type="text"
+            id="otherLocation"
+            name="otherLocation"
+            placeholder="Enter street, building, or landmark"
+            disabled
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="preferredTime">Preferred Pickup/Delivery Time</label>
+          <input
+            type="time"
+            id="preferredTime"
+            name="preferredTime"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="preferredDate">Preferred Pickup/Delivery Date</label>
+          <input
+            type="date"
+            id="preferredDate"
+            name="preferredDate"
+            required
+          />
+        </div>
+
+        <p class="notice">
+          Your requested date and time are subject to confirmation by the admin.
+          Your schedule is not confirmed until you receive confirmation.
+        </p>
+
+        <div class="form-group">
+          <label for="printFile">Upload Your File</label>
+
+          <div class="file-upload">
+            <input
+              type="file"
+              id="printFile"
+              name="printFile"
+              accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+              required
+            />
+
+            <label for="printFile" class="choose-file-button">
+              Choose File
+            </label>
+
+            <span id="fileName" class="file-name"> No file chosen </span>
+
+            <span class="accepted-files">
+              Accepted: PDF, DOC, DOCX, JPG, PNG
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group full">
+          <label for="instructions"> Additional Instructions (Optional) </label>
+
+          <textarea
+            id="instructions"
+            placeholder="Example: Print single-sided"
+          ></textarea>
+        </div>
+
+        <button type="submit" id="submitButton">Review Order</button>
+
+        <p id="resultMessage" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmationModal" class="modal-overlay" hidden>
+      <div class="confirmation-box">
+        <h2>Confirm Your Order</h2>
+        <p class="confirmation-message">
+          Please review your order details before proceeding.
+        </p>
+
+        <div id="orderSummary" class="order-summary"></div>
+
+        <div class="confirmation-buttons">
+          <button type="button" id="cancelOrder" class="cancel-button">
+            Cancel
+          </button>
+
+          <button type="button" id="confirmOrder" class="confirm-button">
+            Order Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Success Modal -->
+<div id="successModal" class="modal-overlay" hidden>
+  <div class="success-box" role="dialog" aria-modal="true"
+       aria-labelledby="successTitle">
+
+    <div class="success-icon" aria-hidden="true">
+      &#10003;
+    </div>
+
+    <h2 id="successTitle">Order Submitted!</h2>
+
+    <p class="success-description">
+      Your print order has been received successfully.
+    </p>
+
+    <div class="success-order-details">
+      <div class="success-detail">
+        <span>Order ID</span>
+        <strong id="successOrderId">—</strong>
+      </div>
+
+      <div class="success-detail">
+        <span>Order Status</span>
+        <strong id="successOrderStatus" class="status-pending">
+          Pending
+        </strong>
+      </div>
+    </div>
+
+    <p class="success-note">
+      We'll review your file and email your quotation.
+      Printing begins only after you approve the price.
+    </p>
+
+    <button type="button" id="successContinue" class="success-button">
+      Continue
+    </button>
+  </div>
+</div>
+
+
+    <script type="py" src="order.py"></script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | CUH Print &amp; Delivery Express</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://pyscript.net/releases/2025.8.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+</head>
+<body>
+
+
+<header class="navbar">
+    <div class="nav-content">
+      <a class="brand">
+        <img src="../images/logo.png" alt="CUH Print & Delivery Express Logo">
+        <span class="logo">Cuh Print &amp; Delivery <span style="color: #ff9b2f;">Service</span></span>
+      </a>
+  
+      <div class="nav-actions">
+        <span id="connectionBadge" class="badge">Backend not connected</span>
+        <button id="logoutButton" class="btn btn-outline" type="button" hidden>
+          Log out
+        </button>
+      </div>
+    </div>
+  </header>
+
+<main class="wrap">
+
+  <section id="dashboardView" hidden>
+    <div class="heading">
+      <div>
+        <p class="eyebrow">ORDER MANAGEMENT</p>
+        <h1>Admin Dashboard</h1>
+        <p class="muted">Review files, send quotations, and track orders.</p>
+      </div>
+      <button id="refreshButton" class="btn outline" type="button">↻ Refresh orders</button>
+    </div>
+
+    <div class="stats">
+      <article class="stat"><span>Total orders</span><strong id="statTotal">—</strong><small>All received orders</small></article>
+      <article class="stat"><span>Needs review</span><strong id="statReview">—</strong><small>New / reviewing file</small></article>
+      <article class="stat"><span>In progress</span><strong id="statProgress">—</strong><small>Approved / printing</small></article>
+      <article class="stat"><span>Completed sales</span><strong id="statSales">—</strong><small>Completed orders</small></article>
+    </div>
+
+    <section class="panel">
+      <div class="toolbar">
+        <div>
+          <h2>Customer orders</h2>
+          <p class="muted small">Select an order to review and update it.</p>
+        </div>
+        <div class="filters">
+          <input id="searchInput" type="search" placeholder="Search name, email, order ID">
+          <select id="statusFilter" aria-label="Filter by status">
+            <option value="">All statuses</option>
+            <option>New Order</option>
+            <option>Reviewing File</option>
+            <option>Quotation Sent</option>
+            <option>Awaiting Customer Approval</option>
+            <option>Approved for Printing</option>
+            <option>Printing</option>
+            <option>Ready for Pickup/Delivery</option>
+            <option>Completed</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Order</th><th>Customer</th><th>Printing</th><th>Status</th><th>Quotation</th><th>Received</th><th></th></tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr><td colspan="7" class="empty">Log in to load orders from your backend.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="ordersMessage" class="message" role="status"></p>
+    </section>
+
+    <section id="orderDetails" class="panel" hidden>
+      <div class="toolbar">
+        <div><p class="eyebrow">ORDER DETAILS</p><h2 id="detailTitle">Selected order</h2></div>
+        <button id="closeDetailsButton" class="btn outline" type="button">Close</button>
+      </div>
+
+      <div id="detailGrid" class="details"></div>
+
+      <div class="filebox">
+        <h3>Uploaded file</h3>
+        <p id="fileInfo" class="muted">No file information.</p>
+        <a id="fileLink" href="#" target="_blank" rel="noopener" hidden>Open uploaded file</a>
+      </div>
+
+      <div class="editgrid">
+        <div>
+          <label for="quoteAmount">Quotation amount (₱)</label>
+          <input id="quoteAmount" type="number" min="0" step="0.01" placeholder="e.g. 35.00">
+        </div>
+        <div>
+          <label for="statusSelect">Order status</label>
+          <select id="statusSelect">
+            <option>New Order</option>
+            <option>Reviewing File</option>
+            <option>Quotation Sent</option>
+            <option>Awaiting Customer Approval</option>
+            <option>Approved for Printing</option>
+            <option>Printing</option>
+            <option>Ready for Pickup/Delivery</option>
+            <option>Completed</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+      </div>
+
+      <label for="adminNotes">Internal admin notes</label>
+      <textarea id="adminNotes" rows="3" placeholder="Optional notes for this order"></textarea>
+
+      <div class="actions">
+        <button id="saveOrderButton" class="btn orange" type="button">Save changes</button>
+        <button id="emailCustomerButton" class="btn outline" type="button">Send quotation email</button>
+        <button id="cancelOrderButton" class="btn danger" type="button">Cancel order</button>
+        <button id="deleteOrderButton" class="btn danger-outline" type="button">Delete order</button>
+      </div>
+      <p id="detailMessage" class="message" role="status"></p>
+      <p class="hint">The backend must authorize and validate changes, quotations, emails, and deletion.</p>
+    </section>
+
+    <!-- Confirmation popup -->
+<div id="confirmModal" class="confirm-overlay" hidden>
+  <div
+    class="confirm-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="confirmTitle"
+    aria-describedby="confirmMessage"
+  >
+    <div id="confirmIcon" class="confirm-icon">!</div>
+
+    <h2 id="confirmTitle">Confirm action</h2>
+    <p id="confirmMessage">Are you sure you want to continue?</p>
+
+    <div class="confirm-actions">
+      <button
+        id="confirmBackButton"
+        class="btn outline"
+        type="button"
+      >
+        Go Back
+      </button>
+
+      <button
+        id="confirmActionButton"
+        class="btn danger"
+        type="button"
+      >
+        Confirm
+      </button>
+    </div>
+  </div>
+</div>
+
+  </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="copyright">
+            &copy; 2026 Cuh Print &amp; Delivery Service. All rights reserved.
+        </div>
+  
+      <div class="legal-links">
+        <a href="../index.html">Back to Home</a>
+      </div>
+    </div>
+  </footer>
+
+<script type="py" src="dashboard.py"></script>
+</body>
+</html>

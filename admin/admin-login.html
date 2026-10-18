@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | CUH Print &amp; Delivery Express</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.8.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+
+    <link rel="stylesheet" href="admin-login.css">
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- NAVBAR -->
+        <header class="navbar">
+            <div class="nav-content">
+                <a class="brand">
+                    <img src="../images/logo.png"
+                         alt="CUH Print & Delivery Express Logo">
+
+                         <span class="logo">Cuh Print &amp; Delivery <span style="color: #ff9b2f;">Service</span></span>
+                </a>
+            </div>
+        </header>
+
+        <!-- LOGIN SECTION -->
+        <main class="login-section">
+            <section class="login-card">
+                <p class="eyebrow">ADMINISTRATION</p>
+
+                <h1>Admin Login</h1>
+
+                <p class="subtitle">
+                    Sign in to manage customer orders and quotations.
+                </p>
+
+                <form id="loginForm" novalidate>
+                    <label for="username">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        autocomplete="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <button type="submit" id="loginButton">
+                        Log In
+                    </button>
+
+                    <p id="loginMessage"
+                       class="message"
+                       role="status"
+                       aria-live="polite"></p>
+                </form>
+
+                <a class="back-link" href="../index.html">
+                    ← Back to main page
+                </a>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <span>CUH Print &amp; Delivery Express</span>
+                    <span>Admin Login</span>
+                </div>
+
+                <div class="legal-links">
+                    <a href="../index.html">Back to Home</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script type="py" src="admin-login.py"></script>
+</body>
+</html>
