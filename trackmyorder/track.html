@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Check the status of your Cuh Print & Delivery Service order.">
+    <title>Track My Order | Cuh Print & Delivery Service</title>
+    <link rel="stylesheet" href="./track.css">
 
+    <!-- PyScript: Python runs in the browser instead of JavaScript. -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="index.html" aria-label="Cuh Print & Delivery Service home">
+            <img src="../images/logo.png" alt="Cuh Print & Delivery Service Logo" class="brand-logo">
+            <span>Cuh Print &amp; Delivery Service</span>
+        </a>
+        <a class="back-link" href="../index.html">Back to Home</a>
+    </header>
+
+    <main class="page-content">
+        <section class="tracking-card" aria-labelledby="page-title">
+            <div class="eyebrow">ORDER UPDATES</div>
+            <h1 id="page-title">Track My Order</h1>
+            <p class="intro">Enter the Order ID you received after submitting your print order to see its latest status.</p>
+
+            <form id="trackingForm">
+                <label for="orderId">Order ID</label>
+                <input id="orderId" name="orderId" type="text" inputmode="numeric"
+                       autocomplete="off" placeholder="e.g. 104" required>
+                <small>Use the number shown in your order confirmation.</small>
+                <button id="trackButton" type="submit">Track Order</button>
+            </form>
+
+            <p id="message" class="message" role="status" aria-live="polite" hidden></p>
+
+            <section id="result" class="result" aria-live="polite" hidden>
+                <div class="result-top">
+                    <div>
+                        <p class="result-label">ORDER ID</p>
+                        <h2 id="resultOrderId">#—</h2>
+                    </div>
+                    <span id="statusBadge" class="status-badge">Pending</span>
+                </div>
+
+                <div class="details">
+                    <div class="detail-row">
+                        <span>Order placed</span>
+                        <strong id="createdAt">—</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Fulfillment</span>
+                        <strong id="fulfillment">—</strong>
+                    </div>
+                    <div class="detail-row" id="preferredDateRow" hidden>
+                        <span>Preferred date</span>
+                        <strong id="preferredDate">—</strong>
+                    </div>
+                    <div class="detail-row" id="preferredTimeRow" hidden>
+                        <span>Preferred time</span>
+                        <strong id="preferredTime">—</strong>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h3>Order progress</h3>
+                    <p id="progressNote" class="progress-note"></p>
+                    <ol id="statusTimeline" class="timeline"></ol>
+                </div>
+            </section>
+
+            <p class="privacy-note">
+                This page uses Order ID only, as requested. Anyone who knows an Order ID may be able to view its status, so avoid sharing it publicly.
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>You Click, We Print, We Deliver!</p>
+    </footer>
+
+    <!-- PyScript code: no separate JavaScript file is used. -->
+    <script type="py" src="./track.py"></script>
+</body>
+</html>
