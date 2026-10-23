@@ -58,8 +58,6 @@ button {
   border: none;
 }
 
-
-
 /* =========================
    HEADER & BRAND
 ========================= */
@@ -148,7 +146,7 @@ button {
 }
 
 .btn-outline:hover {
-  background: #25324B ;
+  background: #25324B;
 }
 
 /* =========================
@@ -228,6 +226,49 @@ button {
   margin-bottom: 18px;
 }
 
+/* =========================
+   RIGHT COLUMN
+========================= */
+.right-column {
+  width: 100%;
+  max-width: 400px;
+  min-width: 0;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =========================
+   ADVERTISEMENT VIDEO SLOT
+========================= */
+.ad-video-slot {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--navy);
+  box-shadow: 0 8px 25px rgba(17, 33, 58, 0.08);
+}
+
+.ad-video-slot video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+
+.ad-video-slot iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+
 /* INFORMATION CARD */
 .info-card {
   width: 100%;
@@ -240,6 +281,13 @@ button {
   border: 1px solid var(--border);
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(17, 33, 58, 0.08);
+}
+
+/* Keep the existing card inside the new right column */
+.right-column .info-card {
+  width: 100%;
+  max-width: none;
+  justify-self: auto;
 }
 
 .info-card h2 {
@@ -357,51 +405,54 @@ button {
   .quick-link {
       padding: 8px;
   }
+
+  .right-column {
+      max-width: 400px;
+  }
 }
 
 /* MOBILE */
 @media (max-width: 600px) {
   .navbar,
-    .nav-content {
-        min-height: 85px;
-    }
+  .nav-content {
+      min-height: 85px;
+  }
 
-    .nav-content {
-        width: 100%;
-        padding: 8px 10px;
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
+  .nav-content {
+      width: 100%;
+      padding: 8px 10px;
+      position: relative;
+      display: flex;
+      align-items: center;
+  }
 
-    .brand {
-        width: 100%;
-        min-width: 0;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-    }
+  .brand {
+      width: 100%;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+  }
 
-    .brand img {
+  .brand img {
       width: 70px;
       height: 70px;
       object-fit: contain;
       flex-shrink: 0;
   }
 
-    .logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 65%;
-        margin: 0;
-        text-align: center;
-        font-size: clamp(15px, 4vw, 18px);
-        font-weight: bold;
-        line-height: 1.2;
-        white-space: nowrap;
-    }
-
+  .logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 65%;
+      margin: 0;
+      text-align: center;
+      font-size: clamp(15px, 4vw, 18px);
+      font-weight: bold;
+      line-height: 1.2;
+      white-space: nowrap;
+  }
 
   .btn {
       min-height: 35px;
@@ -447,6 +498,10 @@ button {
       min-height: 38px;
       padding: 0 13px;
       font-size: 12px;
+  }
+
+  .right-column {
+      max-width: none;
   }
 
   .info-card {
@@ -499,14 +554,14 @@ button {
   }
 
   .brand img {
-    width: 58px;
-    height: 58px;
-}
+      width: 58px;
+      height: 58px;
+  }
 
-.logo {
-    width: 72%;
-    font-size: 13px;
-}
+  .logo {
+      width: 72%;
+      font-size: 13px;
+  }
 
   .hero-content {
       width: 90%;
